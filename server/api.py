@@ -42,6 +42,9 @@ def get_article():
     # TODO Fix generated file name
     response.headers['Content-Disposition'] = f'attachment;filename={filename}'
 
+    # For some reason it returns the file twice.
+    # I think it has to do with the buffer. But I don't know where it doubles
+    # and if that means it's pinging the Google api twice.
     return response
 
 
