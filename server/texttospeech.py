@@ -7,7 +7,7 @@ def article_to_speech(article):
     client = texttospeech.TextToSpeechClient()
 
     # Set the text input to be synthesized
-    synthesis_input = texttospeech.types.SynthesisInput(text=article['text'])
+    synthesis_input = texttospeech.types.SynthesisInput(text=article)
 
     # Build the voice request, select the language code ("en-US") and the ssml
     # voice gender ("neutral")
