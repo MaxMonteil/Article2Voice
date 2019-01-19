@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 newspaper3k = "*"
 google-cloud-texttospeech = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"
