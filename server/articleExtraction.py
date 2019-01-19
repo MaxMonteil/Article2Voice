@@ -8,7 +8,9 @@ def extract_article(url):
     article = Article(
                 url=url,
                 language='en',
-                fetch_images=False)
+                fetch_images=False,
+                memoize_articles=False,
+                verbose=True)
     article.download()
     article.parse()
 
