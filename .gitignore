@@ -3,6 +3,7 @@ keys/
 .env
 
 # editor files
+.vscode/
 *.swp
 
 
