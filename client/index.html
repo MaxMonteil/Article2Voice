@@ -6,6 +6,8 @@
     <title>Listen</title>
 </head>
 <body>
+    <h1>Listen</h1>
+    <p>Enter the url to an article to listen to it.</p>
     <form action="#" method="POST" id="url-form">
         <label for="url-input">URL</label>
         <input type="url" name="url" id="url-input" required>
@@ -13,7 +15,6 @@
     </form>
 </body>
 
-<script src="./download.js"></script>
 <script type="text/javascript">
 const form = document.getElementById('url-form')
 form.addEventListener('submit', handleForm)
@@ -24,35 +25,41 @@ function handleForm(event) {
 }
 
 function submitForm() {
-    const submittedUrl = document.getElementById('url-input').value
-
-    // fetch('http://127.0.0.1:5000/', {
-    //     method: 'GET',
-    //     headers: {
-    //         'Access-Control-Allow-Origin': '*'
-    //     }
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    
-    fetch('http://127.0.0.1:5000/api/v1/article', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            url: submittedUrl
-        })
-    })
+  const submittedUrl = document.getElementById('url-input').value
+  
+  fetch('http://127.0.0.1:5000/api/v1/article/' + submittedUrl)
     .then(response => {
-        console.log(response.headers)
-        return response.blob()
-    })
-    .then(blob => {
-        download(blob, 'test.mp3') 
-    })
-    .catch(err => console.log(err))
+      if (!response.ok)
+        throw {code: response.status}
 
+      return response.json()
+    })
+    .then(data => displayAudio(data.file))
+    .catch(err => displayError(err))
+}
+
+function displayAudio(audio_src) {
+  urlForm = document.getElementById('url-form')
+  urlForm.insertAdjacentHTML('afterend', 
+    `
+    <figure>
+        <figcaption>${audio_src.split('/')[4].split('.mp3')[0]}</figcaption>
+        <audio
+            controls
+            src="${audio_src}">
+                Your browser does not support the
+                <code>audio</code> element.
+        </audio>
+    </figure>`)
+}
+
+function displayError(error) {
+  urlForm = document.getElementById('url-form')
+  urlForm.insertAdjacentHTML('afterend', 
+    `
+    <h3>There was an error.</h3>
+    <p>${error.code == 413 ? 'The article you chose is too long' : ''}</p>
+    `)
 }
 </script>
 </html>
