@@ -1,1 +1,4 @@
+FLASK_APP=<insert your path>/Article2Voice/server/listen/api.py
+FLASK_ENV=development
+AUDIOS_DIR=<insert your path>/Article2Voice/server/audios
 GOOGLE_APPLICATION_CREDENTIALS=[/path/to/service-account-file.json]
