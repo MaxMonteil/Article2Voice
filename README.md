@@ -61,7 +61,14 @@ GET
 
 Currently there is a simple `index.html` file there for testing.
 
-### To Do
+## To Do
+
+### Server
+
+- [ ] Improve API security
+- [ ] Deploy API to Heroku
+- [ ] Enable audio streaming instead of returning the whole complete file
+
+### Client
 
 - [ ] Implement front-end with React
-
