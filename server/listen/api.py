@@ -78,8 +78,11 @@ def url_validator(url):
 
 
 def file_was_downloaded(filename):
-    filepath = os.path.join(os.environ['AUDIOS_DIR'], filename)
+    if not os.path.isdir(os.path.join(os.environ['AUDIOS_DIR'])):
+        os.mkdir(os.path.join(os.environ['AUDIOS_DIR']))
+        return False
 
+    filepath = os.path.join(os.environ['AUDIOS_DIR'], filename)
     return os.path.isfile(filepath)
 
 
